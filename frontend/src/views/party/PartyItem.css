@@ -1,0 +1,31 @@
+.party-item img{
+    display: block;
+    height: 75%;
+    width: 100%
+}
+.title{
+    font-style: normal;
+    font-weight: bold;
+    text-align: center;
+    font-size: 15px;
+}
+
+.people{
+   font-style: normal;
+    font-weight: normal;
+    text-align: left;
+    font-size: 15px;
+}
+
+.item-button,
+.item-button:hover,
+.item-button:focus{
+        color: white;
+        background: #00AB66;
+ }
+ .item-button-2,
+ .item-button-2:hover,
+ .item-button-2:focus{
+         color: white;
+         background: #B53737;
+  }
