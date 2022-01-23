@@ -1,0 +1,70 @@
+.app-section{
+    padding: 30px;
+  }
+  
+.app-container{
+    max-width: 800px;
+    margin-left:  auto;
+    margin-right: auto;
+  }
+  
+.app-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 20px;
+    row-gap: 20px;
+}
+.app-search{
+    margin-bottom: 15px;
+}
+.app-search-input{
+    width: 100%;
+    padding: 8px;
+    font-size: 16 px;
+    box-sizing: border-box;
+    border: 1px solid gray;
+}
+.logout{
+    text-align: right;
+    padding-top: 1%;
+    padding-right: 5%;
+}
+
+.logout-button,
+.logout-button:hover,
+.logout-button:focus{
+        color: #530b69;
+        background: white;
+        font-weight: bold;
+ }
+
+.create-party{
+    text-align: left;
+    padding-top: 1%;
+    padding-left: 5%;
+}
+.create-party-button,
+.create-party-button:hover,
+.create-party-button:focus{
+    color: black;
+    background: #ffa500;
+    font-weight: bold;
+ }
+
+ .my-party{
+    text-align: left;
+    padding-top: 1%;
+    padding-left: 5%;
+}
+
+ .my-party-button,
+.my-party-button:hover,
+.my-party-button:focus{
+    color: white;
+    background: #530b69;
+    font-weight: bold;
+ }
+.all-party{
+    text-align: 'center';
+    margin-top: '1%';
+}
