@@ -2,6 +2,7 @@ import React from 'react';
 import { Form, Input, Button, Typography, Row, message } from 'antd';
 import './LogIn.css';
 import * as api from '../../lib/api'
+import logo from '../../img/logo_black.png'
 const { Title } = Typography;
 const required = value => (value ? undefined : 'This field is required');
 const email = value =>
@@ -64,7 +65,14 @@ class LogIn extends React.Component {
       <div className="mobile-background">
       <div className="psr-login-card">
         <Form colon={false}>
-          <Title style={{ textAlign: 'center', marginBottom: 16 }}>LOGO</Title>
+        <Row
+            type="flex"
+            align="middle"
+            justify="center"
+            style={{ marginBottom: '8px' }}
+          >
+              <img className="register-logo" src={logo}/>
+          </Row>
           <Title
             level={2}
             style={{ textAlign: 'center', marginTop: 0, marginBottom: 32 }}

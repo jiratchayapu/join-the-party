@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&family=Outfit&display=swap');
 .login-pad{
     margin-top: 10%;
 }
@@ -16,6 +17,7 @@
     background: white;
 }
   .psr-login-card {
+    font-family: 'Comfortaa';
     margin: 24px 40%;
     border-radius: 16px;
     background-color: rgb(236, 233, 236);
@@ -43,6 +45,18 @@
       border-radius: 16px;
       background-color: rgb(236, 233, 236);
       padding: 32px;
+    }
+  }
+
+  .register-logo{
+    width: 80%;
+    height: 80%;
+  }
+
+  @media only screen and (max-width: 400px){
+    .register-logo {
+      width:80%;
+      text-align: 'center';
     }
   }
   
