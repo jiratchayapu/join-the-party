@@ -13,11 +13,10 @@ const userCtrl = {
           .catch((e) => res.error(e));
     },
     login: (req, res) => {
-        const body = {...req.body, parties: []};
+        const body = req.body;
         if(!body.email || !body.password){
           throw new Error("Every field is required")
         }
-        const body = req.body;
         User.find(body)
           .then((result) => {
             if(result.length == 0) {
