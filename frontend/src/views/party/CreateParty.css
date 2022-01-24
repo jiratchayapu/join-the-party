@@ -91,7 +91,7 @@
     height: 15%;
   }
 
-  @media only screen and (max-width: 400px){
+  @media only screen and (max-width: 414px){
     .create-logo {
       width:50%;
       text-align: 'center';

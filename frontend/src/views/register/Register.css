@@ -69,9 +69,9 @@
     height: 15%;
   }
 
-  @media only screen and (max-width: 400px){
+  @media only screen and (max-width: 414px){
     .register-logo {
-      width:80%;
+      width:50%;
       text-align: 'center';
     }
   }

@@ -30,7 +30,6 @@ class LogIn extends React.Component {
       const values = { ...this.state.values };
       try {
         const data = await api.user.login(values)
-        message.success('Registration Successful')
         sessionStorage.setItem('token', JSON.stringify(data[0]._id));
         window.location.href='/parties/'
       } catch (error) {

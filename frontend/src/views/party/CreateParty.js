@@ -71,7 +71,7 @@ class CreateParty extends React.Component {
               id: JSON.parse(sessionStorage.getItem("token"))};
             try {
               const data = await api.party.create(values)
-              message.success('Registration Successful')
+              message.success('Create Party Successful!')
               window.location.href='/parties'
             } catch (error) {
               message.error('Registration failed please try again')

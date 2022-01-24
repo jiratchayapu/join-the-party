@@ -76,7 +76,7 @@
     height: 15%;
   }
 
-  @media only screen and (max-width: 400px){
+  @media only screen and (max-width: 414px){
     .search-logo {
       width:30%;
       text-align: 'center';

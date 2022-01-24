@@ -19,7 +19,7 @@ const email = value =>
   value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
     ? 'Invalid email address'
     : undefined;
-const accepted = value => (value===true ? undefined : 'You must accept the terms and conditions to register')
+const accepted = value => (value===true ? undefined : 'You must accept the terms and conditions')
 
 class Register extends React.Component {
   constructor(props) {
@@ -37,17 +37,17 @@ class Register extends React.Component {
         xs: { span: 20 },
         sm: { span: 7 },
         md: { span: 10 },
-        lg: { span: 100 }
+        lg: { span: 10 }
       },
       wrapperCol: {
         xs: { span: 20 },
         sm: { span: 16 },
         md: { span: 12 },
-        lg: { span: 100 }
+        lg: { span: 15 }
       }
     };
 
-    this.columnLayout = { xs: 24, md: 12, lg: 10, xl: 8, xxl: 100 };
+    this.columnLayout = { xs: 24, md: 12, lg: 10, xl: 8, xxl: 6 };
     this.validators = {
       firstName: [required],
       lastName: [required],
@@ -94,7 +94,7 @@ class Register extends React.Component {
       const values = { ...this.state.values };
       try {
         const data = await api.user.register(values)
-        message.success('Registration Successful')
+        message.success('Registration Successful!')
         window.location.href='/'
       } catch (error) {
         message.error('Registration failed please try again')
@@ -225,6 +225,7 @@ class Register extends React.Component {
                 />
               </Form.Item>
             <Form.Item
+                wrapperCol={{ span: 24 }}
                 validateStatus={this.state.error.consent ? 'error' : undefined}
                 help={this.state.error.consent}
               >
