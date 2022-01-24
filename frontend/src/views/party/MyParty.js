@@ -4,11 +4,14 @@ import AppSearch from './AppSearch';
 import PartyItem from './PartyItem';
 import { Typography, Col, Row, Button, message } from 'antd';
 import * as api from '../../lib/api'
+import logo from '../../img/logo_black.png'
 const { Title } = Typography;
 
 function MyParty() {
   const [searchText, setSearchText] = useState('');
   const [parties, setParties] = useState([]);
+  const columnLayout = { xs: { span: 14 }, md: { span: 16 }, lg: { span: 18 }, xl: { span: 20 }, xxl: { span: 22 } };
+  const columnLayout2 = { xs: { span: 5 }, md: { span: 4 }, lg: { span: 3 }, xl: { span: 2 }, xxl: { span: 1 } };
   useEffect(() => {
     getAllParty()
   }, [])
@@ -20,14 +23,13 @@ function MyParty() {
       data.forEach(element => element['joined'] = true)
       console.log('Party: ', data)
       setParties(data)
-      message.success('Load success!')
     } catch (error) {
       console.log(error)
       message.error('Load failed please try again')
     }
   }
   const filteredParty = parties.filter((party) => {
-    return party.name.includes(searchText)
+    return party.name.toLowerCase().includes(searchText.toLowerCase())
   })
 
   async function onClickDisjoinParty(party){
@@ -57,7 +59,7 @@ function MyParty() {
   return (
     <div className="app">
     <Row>
-      <Col span={2} className='create-party'>
+      <Col {...columnLayout2}  className='create-party'>
       <Button
             icon={'+'}
             className='create-party-button'
@@ -67,7 +69,7 @@ function MyParty() {
             onClick={createParty}
         />
       </Col>
-      <Col span={2} className='back-party'>
+      <Col {...columnLayout2}  className='back-party'>
       <Button
             icon={'back'}
             className='back-party-button'
@@ -77,7 +79,7 @@ function MyParty() {
             onClick={() => window.location.href='/parties'}
         />
       </Col>
-      <Col span={20} className='logout'>
+      <Col {...columnLayout}  className='logout'>
       <Button
             icon={'Log out'}
             className='logout-button'
@@ -92,7 +94,14 @@ function MyParty() {
       </Col>
     </Row>
     <div>
-      <Title className='all-party'>MY PARTY</Title>
+    <Row
+              type="flex"
+              align="middle"
+              justify="center"
+          >
+              <img className="my-party-logo" src={logo}/>
+          </Row>
+      <Title level={2} className='all-party'>my party</Title>
       <section className="app-section">
         <div className="app-container">
           <AppSearch value={searchText} onValueChange={setSearchText}/>

@@ -23,14 +23,13 @@ function SearchParty() {
       data.forEach(element => element['joined'] = false)
       console.log(data)
       setParties(data)
-      message.success('Load success!')
     } catch (error) {
       console.log(error)
       message.error('Load failed please try again')
     }
   }
   const filteredParty = parties.filter((party) => {
-    return party.name.includes(searchText)
+    return party.name.toLowerCase().includes(searchText.toLowerCase())
   })
 
   async function onClickJoinParty(party){
