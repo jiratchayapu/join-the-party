@@ -71,3 +71,14 @@
     text-align: 'center';
     margin-top: '1%';
 }
+.search-logo{
+    width: 15%;
+    height: 15%;
+  }
+
+  @media only screen and (max-width: 400px){
+    .search-logo {
+      width:30%;
+      text-align: 'center';
+    }
+  }

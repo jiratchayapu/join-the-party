@@ -4,6 +4,7 @@ import AppSearch from './AppSearch';
 import PartyItem from './PartyItem';
 import { Typography, Col, Row, Button, message } from 'antd';
 import * as api from '../../lib/api'
+import logo from '../../img/logo_black.png'
 const { Title } = Typography;
 
 function SearchParty() {
@@ -92,9 +93,14 @@ function SearchParty() {
         />
       </Col>
     </Row>
-    
     <div>
-      <Title className='all-party'>PARTY</Title>
+        <Row
+            type="flex"
+            align="middle"
+            justify="center"
+        >
+            <img className="search-logo" src={logo}/>
+        </Row>
       <section className="app-section">
         <div className="app-container">
           <AppSearch value={searchText} onValueChange={setSearchText}/>
