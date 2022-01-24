@@ -11,10 +11,10 @@ const partyCtrl = {
         const body = {...Object.fromEntries(Object.entries(req.body).
           filter(([key, val]) => key != 'id')), remainingPeople: 1};
         if(!body.name || body.attendance < 1) {
-          throw new Error("Name or attendance fields are invalid");
+          res.status(400).json({message: "Name or attendance fields are invalid please try again"})
         }
         if (!creator){
-          throw new Error("Session expired");
+          res.status(400).json({message: "Session expired please log in again"})
         }
         Party.create(body)
           .then((result) => {
@@ -57,13 +57,13 @@ const partyCtrl = {
     joinParty: (req, res) => {
       const body = req.body;
       if(!body.party_id || !body.user_id) {
-        throw new Error("Join party failed")
+        res.status(400).json({message: "Join party failed please try again"})
       }
       Party.find(
         { '_id': ObjectId(body.party_id) },
       ).then((result) => { 
         if(result[0].remainingPeople >= result[0].attendance) {
-          throw new Error("Join party failed")
+          res.status(400).json({message: "Join party failed please try again"})
         } 
       })
       Party.updateOne(
@@ -83,13 +83,13 @@ const partyCtrl = {
   disjoinParty: (req, res) => {
     const body = req.body;
     if(!body.party_id || !body.user_id) {
-      throw new Error("Disjoin party failed")
+      res.status(400).json({message: "Left party failed please try again"})
     }
     Party.find(
       { '_id': ObjectId(body.party_id) },
     ).then((result) => { 
       if(result[0].remainingPeople < 1) {
-        throw new Error("Disjoin party failed")
+        res.status(400).json({message: "Left party failed please try again"})
       } 
       })
     Party.updateOne(

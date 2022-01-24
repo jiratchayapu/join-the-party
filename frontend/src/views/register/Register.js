@@ -96,8 +96,8 @@ class Register extends React.Component {
         const data = await api.user.register(values)
         message.success('Registration Successful!')
         window.location.href='/'
-      } catch (error) {
-        message.error('Registration failed please try again')
+      } catch (e) {
+        e.response ? message.error(e.response.data.message) : message.error("Load failed please try again")
       }
     }
   }

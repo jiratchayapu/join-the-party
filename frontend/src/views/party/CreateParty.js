@@ -73,8 +73,8 @@ class CreateParty extends React.Component {
               const data = await api.party.create(values)
               message.success('Create Party Successful!')
               window.location.href='/parties'
-            } catch (error) {
-              message.error('Registration failed please try again')
+            } catch (e) {
+               e.response ? message.error(e.response.data.message) : message.error("Load failed please try again")
             }
           }
     }

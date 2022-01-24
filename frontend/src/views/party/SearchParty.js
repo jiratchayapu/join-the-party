@@ -20,9 +20,8 @@ function SearchParty() {
       const data = await api.party.get(JSON.parse(sessionStorage.getItem("token")))
       data.forEach(element => element['joined'] = false)
       setParties(data)
-    } catch (error) {
-      console.log(error)
-      message.error('Load failed please try again')
+    } catch (e) {
+       e.response ? message.error(e.response.data.message) : message.error("Load failed please try again")
     }
   }
   const filteredParty = parties.filter((party) => {
@@ -37,9 +36,8 @@ function SearchParty() {
       })
       message.success('Join Party Success!')
       getAllParty()
-    } catch (error) {
-      console.log(error)
-      message.error('Join Party failed please try again')
+    } catch (e) {
+      e.response ? message.error(e.response.data.message) : message.error("Load failed please try again")
     }
   }
 

@@ -32,8 +32,8 @@ class LogIn extends React.Component {
         const data = await api.user.login(values)
         sessionStorage.setItem('token', JSON.stringify(data[0]._id));
         window.location.href='/parties/'
-      } catch (error) {
-        message.error('Invalid email or password please try again')
+      } catch (e) {
+        e.response ? message.error(e.response.data.message) : message.error("Load failed please try again")
       }
     }
   }
