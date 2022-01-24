@@ -41,6 +41,7 @@
   }
   
 .mobile-background {
+    font-family: 'Comfortaa';
     margin-top: 5%;
     background-color:white;
     width: 100%;
@@ -83,4 +84,16 @@
     font-weight: bold;
     font-style: normal;
     font-size: 10pt;
+  }
+
+  .create-logo{
+    width: 15%;
+    height: 15%;
+  }
+
+  @media only screen and (max-width: 400px){
+    .create-logo {
+      width:50%;
+      text-align: 'center';
+    }
   }

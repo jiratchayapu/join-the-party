@@ -1,8 +1,9 @@
 import React from 'react';
 import { Form, Avatar, Input, Button, Typography, Row, Popconfirm, message, Col,Upload, AntAvatar } from 'antd';
 import './CreateParty.css';
-import { UploadOutlined } from '@ant-design/icons';
+import logo from '../../img/logo_black.png'
 import * as api from '../../lib/api'
+
 const { Title } = Typography;
 const required = value => (value ? undefined : 'This field is required');
 const isNum = value => (Number(value) >= 0 ? undefined : 'The field must be a positive number');
@@ -20,9 +21,9 @@ function beforeUpload(file) {
   }
   const isLt2M = file.size / 1024 / 1024 < 5;
   if (!isLt2M) {
-    message.error('Image must smaller than 5MB!');
+    message.error('Image must smaller than 5MB');
   }
-  return isJpgOrPng && isLt2M;
+  return (isJpgOrPng && isLt2M) || Upload.LIST_IGNORE;
 }
 
 const dummyRequest = ({ file, onSuccess }) => {
@@ -41,7 +42,6 @@ class CreateParty extends React.Component {
             this.submit = this.submit.bind(this)
             this.setFieldValue = this.setFieldValue.bind(this)
             this.handleChange = this.handleChange.bind(this)
-            //this.getBase64 = this.getBase64.bind(this)
             this.validators = {
                 name: [required],
                 attendance: [required, isNum],
@@ -64,7 +64,11 @@ class CreateParty extends React.Component {
         }
     async submit(){
         if (this.validateAll()) {
-            const values = { ...this.state.values, id: JSON.parse(sessionStorage.getItem("token"))};
+            const values = { ...this.state.values, 
+              name: this.state.values.name,
+              attendance: parseInt(this.state.values.attendance),
+              picture: this.state.values.picture,
+              id: JSON.parse(sessionStorage.getItem("token"))};
             console.log(values)
             try {
               const data = await api.party.create(values)
@@ -93,30 +97,18 @@ class CreateParty extends React.Component {
         return valid;
       }
     setFieldValue(field, value) {
-      console.log(this.state.values)
-      if(field == "attendance" && Number(value) >= 0){
-        this.setState({
-          values: { ...this.state.values, [field]: parseInt(value) },
-          error: { ...this.state.error, [field]: null }
-        });
-      }
-      else{
         this.setState({
           values: { ...this.state.values, [field]: value },
           error: { ...this.state.error, [field]: null }
         });
       }
-      }
 
       handleChange(info){
-        if (info.file.status === 'error') message.error()
         if (info.file.status === 'done') {
           message.success('Upload done')
-          // Get this url from response in real world.
           getBase64(info.file.originFileObj, imageUrl =>
             this.setFieldValue('picture', imageUrl)
           );
-          //this.props.onChange(info.file.originFileObj);
         }
       };
     
@@ -124,7 +116,14 @@ class CreateParty extends React.Component {
     return (
       <Form className='mobile-background' colon={false} {...this.formLayout}>
         <div className="create-party-card"> 
-          <Title className='create-title'>Create Party</Title>
+          <Row
+              type="flex"
+              align="middle"
+              justify="center"
+          >
+              <img className="create-logo" src={logo}/>
+          </Row>
+          <Title level={2} className='create-title'>create party</Title>
           <Row             
             type="flex"
             align="top"
@@ -168,27 +167,15 @@ class CreateParty extends React.Component {
                 />
               </Form.Item>
               <Upload
-               // fileList={this.state.values.fileList}
                 customRequest={dummyRequest}
                 beforeUpload={beforeUpload}
                 onChange={this.handleChange}
+                listType="picture"
+                maxCount={1}
                 >
-                <Button>Choose File</Button>
-                {/*
-                  this.state.values.picture !== '' ?
-                  <img src={this.state.values.picture} />
-                  //<Avatar icon="user" shape="square" size={182} src={this.state.values.picture} /> 
-                    : <div style={{height : '100%', width : '192px',display : 'table-cell', verticalAlign : 'middle', textAlign : 'center'}}>
-                        <UploadOutlined />
-                        <div className="ant-upload-text" style={{color: '#0038A8', fontSize : '1.1rem'}}>Upload</div>
-                      </div>
-                */}
+                <Button>Choose Cover Picture</Button>
               </Upload>
-              {//<img src={this.state.values.picture} />
-              }
-              {//<input type="file" className="cover-picture" onChange={(e) => this.onImageChange(e)} />
-              
-              }</Col>
+            </Col>
           </Row>
           
           <div className="for-mobile">
