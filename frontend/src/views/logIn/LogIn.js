@@ -71,7 +71,7 @@ class LogIn extends React.Component {
             justify="center"
             style={{ marginBottom: '8px' }}
           >
-              <img className="register-logo" src={logo}/>
+              <img className="login-logo" src={logo}/>
           </Row>
           <Title
             level={2}

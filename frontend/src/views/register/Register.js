@@ -11,8 +11,7 @@ import {
   Checkbox,
   Typography
 } from 'antd';
-//import logo from '../imgs/blue_logo.png';
-//import SaveModal from '../saveRegisterModal';
+import logo from '../../img/logo_black.png'
 import * as api from '../../lib/api'
 import './Register.css';
 
@@ -40,17 +39,17 @@ class Register extends React.Component {
         xs: { span: 20 },
         sm: { span: 7 },
         md: { span: 10 },
-        lg: { span: 9 }
+        lg: { span: 100 }
       },
       wrapperCol: {
         xs: { span: 20 },
         sm: { span: 16 },
         md: { span: 12 },
-        lg: { span: 15 }
+        lg: { span: 100 }
       }
     };
 
-    this.columnLayout = { xs: 24, md: 12, lg: 10, xl: 8, xxl: 6 };
+    this.columnLayout = { xs: 24, md: 12, lg: 10, xl: 8, xxl: 100 };
     this.validators = {
       firstName: [required],
       lastName: [required],
@@ -109,23 +108,21 @@ class Register extends React.Component {
 
   render() {
     return (
-      <Form className='mobile-background' colon={false} {...this.formLayout}>
+      <Form className='mobile-background-2' colon={false} {...this.formLayout}>
         <div className="psr-register-card"> 
-          {/*<Row
+          <Row
             type="flex"
             align="middle"
             justify="center"
-            style={{ marginBottom: '32px' }}
           >
               <img className="register-logo" src={logo}/>
-          </Row>*/}
-          <Title style={{ textAlign: 'center', marginBottom: 16 }}>LOGO</Title>
+          </Row>
           <Row
             type="flex"
             align="middle"
             justify="center"
             className="text-title"
-            style={{ marginBottom: '32px' }}
+            style={{ marginBottom: '16px' }}
           >
             Register
           </Row>
@@ -243,7 +240,7 @@ class Register extends React.Component {
               </Form.Item>
             </Col>
           </Row>
-          <div className="for-mobile">
+          <div className="for-mobile-register">
             <Row type="flex" align="middle" justify="space-around">
               <Popconfirm
                 placement="top"
@@ -277,28 +274,6 @@ class Register extends React.Component {
             </Row>
           </div>
         </div>
-
-        {/*<CancelModal
-          visible={modals.cancel || false}
-          accept={onCancel}
-          onCancel={() => hideModal('cancel')}
-        />
-        <SaveModal
-          visible={modals.submit || false}
-          onSave={this.submit}
-          saving={submitting}
-          onClose={() => hideModal('submit')}
-        />
-        <WarningModal
-          visible={ modals.warning || false }
-          onOk={ onWarningOk } // what's ever button user press it's just "Close" modal
-          warning={ submitWarning || {} }
-        />
-        <AfterRegistInfo
-          visible={ modals.showInfo || false }
-          onOk={this.closeShowInfo}
-          dataObject={ regResult || {} }
-        />*/}
       </Form>
     );
   }
