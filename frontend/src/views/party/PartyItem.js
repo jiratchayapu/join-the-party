@@ -4,7 +4,7 @@ import { Form, Icon, Input, Button, Typography, Row, Popconfirm, message, Col, I
 function PartyItem(props){
   const {party, onClickJoin} = props;
     return(<div className="party-item">
-    <img src={party.picture ? party.picture : "error"}></img>
+    <img src={party.picture ? party.picture : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqhMfmVPGd1wpu9Bucc2vToj8zTowaXiJMjGv9Q1Wb0RS1a-g53z9EQH7uT-TXNjgeOxQ&usqp=CAU"}></img>
     <div className='title'>{party.name}</div>
     <Row>
       <Col span={12}>

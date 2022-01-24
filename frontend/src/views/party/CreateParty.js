@@ -1,11 +1,35 @@
 import React from 'react';
-import { Form, Icon, Input, Button, Typography, Row, Popconfirm, message, Col,Upload } from 'antd';
+import { Form, Avatar, Input, Button, Typography, Row, Popconfirm, message, Col,Upload, AntAvatar } from 'antd';
 import './CreateParty.css';
 import { UploadOutlined } from '@ant-design/icons';
 import * as api from '../../lib/api'
 const { Title } = Typography;
 const required = value => (value ? undefined : 'This field is required');
 const isNum = value => (Number(value) >= 0 ? undefined : 'The field must be a positive number');
+
+function getBase64(img, callback) {
+  const reader = new FileReader();
+  reader.addEventListener('load', () => callback(reader.result));
+  reader.readAsDataURL(img);
+}
+
+function beforeUpload(file) {
+  const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+  if (!isJpgOrPng) {
+    message.error('You can only upload JPG/JPEG/PNG file!');
+  }
+  const isLt2M = file.size / 1024 / 1024 < 5;
+  if (!isLt2M) {
+    message.error('Image must smaller than 5MB!');
+  }
+  return isJpgOrPng && isLt2M;
+}
+
+const dummyRequest = ({ file, onSuccess }) => {
+  setTimeout(() => {
+    onSuccess("ok");
+  }, 0);
+};
 
 class CreateParty extends React.Component {
         constructor(props) {
@@ -16,6 +40,7 @@ class CreateParty extends React.Component {
             };
             this.submit = this.submit.bind(this)
             this.setFieldValue = this.setFieldValue.bind(this)
+            this.handleChange = this.handleChange.bind(this)
             //this.getBase64 = this.getBase64.bind(this)
             this.validators = {
                 name: [required],
@@ -68,6 +93,7 @@ class CreateParty extends React.Component {
         return valid;
       }
     setFieldValue(field, value) {
+      console.log(this.state.values)
       if(field == "attendance" && Number(value) >= 0){
         this.setState({
           values: { ...this.state.values, [field]: parseInt(value) },
@@ -80,16 +106,19 @@ class CreateParty extends React.Component {
           error: { ...this.state.error, [field]: null }
         });
       }
-        
       }
 
-    onImageChange(event) {
-      if (event.target.files && event.target.files[0]) {
-        let img = event.target.files[0];
-        this.setFieldValue('picture', URL.createObjectURL(img));
-        console.log(URL.createObjectURL(img))
-      }
-    }
+      handleChange(info){
+        if (info.file.status === 'error') message.error()
+        if (info.file.status === 'done') {
+          message.success('Upload done')
+          // Get this url from response in real world.
+          getBase64(info.file.originFileObj, imageUrl =>
+            this.setFieldValue('picture', imageUrl)
+          );
+          //this.props.onChange(info.file.originFileObj);
+        }
+      };
     
   render() {
     return (
@@ -138,10 +167,28 @@ class CreateParty extends React.Component {
                   maxLength={40}
                 />
               </Form.Item>
+              <Upload
+               // fileList={this.state.values.fileList}
+                customRequest={dummyRequest}
+                beforeUpload={beforeUpload}
+                onChange={this.handleChange}
+                >
+                <Button>Choose File</Button>
+                {/*
+                  this.state.values.picture !== '' ?
+                  <img src={this.state.values.picture} />
+                  //<Avatar icon="user" shape="square" size={182} src={this.state.values.picture} /> 
+                    : <div style={{height : '100%', width : '192px',display : 'table-cell', verticalAlign : 'middle', textAlign : 'center'}}>
+                        <UploadOutlined />
+                        <div className="ant-upload-text" style={{color: '#0038A8', fontSize : '1.1rem'}}>Upload</div>
+                      </div>
+                */}
+              </Upload>
               {//<img src={this.state.values.picture} />
               }
-              <input type="file" className="cover-picture" onChange={(e) => this.onImageChange(e)} />
-              </Col>
+              {//<input type="file" className="cover-picture" onChange={(e) => this.onImageChange(e)} />
+              
+              }</Col>
           </Row>
           
           <div className="for-mobile">
