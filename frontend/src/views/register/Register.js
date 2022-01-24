@@ -9,13 +9,11 @@ import {
   Select,
   message,
   Checkbox,
-  Typography
 } from 'antd';
 import logo from '../../img/logo_black.png'
 import * as api from '../../lib/api'
 import './Register.css';
 
-const { Title } = Typography;
 const required = value => (value ? undefined : 'This field is required');
 const email = value =>
   value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
@@ -77,7 +75,6 @@ class Register extends React.Component {
   validateAll() {
     const errors = {};
     var valid = true;
-    console.log(this.state.values)
     Object.entries(this.validators).forEach(([field, validators]) => {
       for (let i = 0; i < validators.length; ++i) {
         const error = validators[i](this.state.values[field]);
@@ -98,7 +95,6 @@ class Register extends React.Component {
       try {
         const data = await api.user.register(values)
         message.success('Registration Successful')
-        console.log(data)
         window.location.href='/'
       } catch (error) {
         message.error('Registration failed please try again')

@@ -18,10 +18,8 @@ function MyParty() {
 
   async function getAllParty() {
     try {
-      console.log(JSON.parse(sessionStorage.getItem("token")))
       const data = await api.party.getMyParties(JSON.parse(sessionStorage.getItem("token")))
       data.forEach(element => element['joined'] = true)
-      console.log('Party: ', data)
       setParties(data)
     } catch (error) {
       console.log(error)
@@ -34,12 +32,10 @@ function MyParty() {
 
   async function onClickDisjoinParty(party){
     try {
-      console.log(party.target.id)
       const data = await api.party.disjoin({
         'user_id': JSON.parse(sessionStorage.getItem("token")),
         'party_id': party.target.id
       })
-      console.log(data)
       message.success('Disjoin Party Success!')
       getAllParty()
     } catch (error) {

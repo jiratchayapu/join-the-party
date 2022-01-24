@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Avatar, Input, Button, Typography, Row, Popconfirm, message, Col,Upload, AntAvatar } from 'antd';
+import { Form, Input, Button, Typography, Row, Popconfirm, message, Col, Upload } from 'antd';
 import './CreateParty.css';
 import logo from '../../img/logo_black.png'
 import * as api from '../../lib/api'
@@ -69,11 +69,9 @@ class CreateParty extends React.Component {
               attendance: parseInt(this.state.values.attendance),
               picture: this.state.values.picture,
               id: JSON.parse(sessionStorage.getItem("token"))};
-            console.log(values)
             try {
               const data = await api.party.create(values)
               message.success('Registration Successful')
-              console.log(data)
               window.location.href='/parties'
             } catch (error) {
               message.error('Registration failed please try again')

@@ -2,7 +2,6 @@ const express = require('express'),
     mongoose = require('mongoose'),
     cors = require('cors'),
     bodyParser = require('body-parser'),
-    //dbConfig = require('./database/db');
     path = require('path');
 
 const Route = require('./routes');
@@ -10,7 +9,6 @@ const Route = require('./routes');
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost:27017/party', {
     useNewUrlParser: true,
-    // useUnifiedTopology: true
 }).then(() => {
     console.log('Database successfully connected');
 }, 
@@ -21,7 +19,7 @@ mongoose.connect('mongodb://localhost:27017/party', {
 
 const app = express();
 app.use(function(req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', '*'); //หรือใส่แค่เฉพาะ domain ที่ต้องการได้
+    res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
     res.setHeader('Access-Control-Allow-Credentials', true);

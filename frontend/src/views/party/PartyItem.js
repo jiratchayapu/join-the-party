@@ -1,5 +1,5 @@
 import './PartyItem.css';
-import { Form, Icon, Input, Button, Typography, Row, Popconfirm, message, Col, Image } from 'antd';
+import { Button, Row, Col} from 'antd';
 
 function PartyItem(props){
   const {party, onClickJoin} = props;
