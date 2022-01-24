@@ -12,6 +12,8 @@ function SearchParty() {
   useEffect(() => {
     getAllParty()
   }, [])
+  const columnLayout = { xs: { span: 6 }, md: { span: 10 }, lg: { span: 14 }, xl: { span: 16 }, xxl: { span: 18 } };
+  const columnLayout2 = { xs: { span: 9 }, md: { span: 6 }, lg: { span: 5 }, xl: { span: 4 }, xxl: { span: 3 } };
 
   async function getAllParty() {
     try {
@@ -53,11 +55,10 @@ function SearchParty() {
     window.location.href='/create-party'
   }
   
-
   return (
     <div className="app">
     <Row>
-      <Col span={18} className='create-party'>
+      <Col {...columnLayout} className='create-party'>
       <Button
             icon={'+'}
             className='create-party-button'
@@ -67,9 +68,9 @@ function SearchParty() {
             onClick={createParty}
         />
       </Col>
-      <Col span={3} className='my-party'>
+      <Col {...columnLayout2} className='my-party'>
       <Button
-            icon={'my parties'}
+            icon={'My party'} 
             className='my-party-button'
             type="primary"
             shape="round"
@@ -77,7 +78,7 @@ function SearchParty() {
             onClick={() => window.location.href='/my-parties'}
         />
       </Col>
-      <Col span={3} className='logout'>
+      <Col {...columnLayout2} className='logout'>
       <Button
             icon={'Log out'}
             className='logout-button'

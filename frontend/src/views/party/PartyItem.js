@@ -14,7 +14,7 @@ function PartyItem(props){
         <Button
           id={party._id}
           className={party.joined ? 'item-button-2' : 'item-button'}
-          icon={party.joined ? "Disjoin" : "Join"}
+          icon={party.joined ? "Left" : "Join"}
           type="primary"
           shape="round"
           size="small"
