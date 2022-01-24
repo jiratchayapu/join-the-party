@@ -4,24 +4,30 @@
 
 In the project directory, you can run:
 
-#Frontend
+#install dependencies
+### `yarn install`
 
-$ cd ../frontend
+#Runs the app in the development mode. [http://localhost:3000] to view it in your browser.
+### `$ yarn start` 
 
-##install dependencies
-$ yarn install
+### Frontend
 
-##Runs the app in the development mode.
-$ yarn start
+`$ cd ../frontend` 
+
+#### install dependencies
+`$ yarn install` 
+
+#### Runs the app in the development mode.
+`$ yarn start` 
 
 open http://localhost:3000 to view it in your browser.
 
-#backend
+### backend
 
-$ cd ../backend
+`$ cd ../backend` 
 
-##install dependencies
-$ yarn install
+#### install dependencies
+`$ yarn install`
 
-##run server
-$ yarn start
+#### run server
+`$ yarn start`
